@@ -10,6 +10,9 @@ const dotenv = require(`dotenv`);
 const httpServer = new HttpServer(app);
 const isLogged = require('./src/middlewares/logged');
 const io = new IOServer(httpServer);
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUiExpress = require('swagger-ui-express');
+
 const socketIoChat = require(`./src/webSockets/webSocketChat`);
 socketIoChat(io); 
 dotenv.config();
@@ -25,24 +28,38 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 
-
-//Middleware
+// Middleware de sesión
 app.use(
     session({
       store: MongoStore.create({
-        mongoUrl: process.env.MONGO, // Aquí se usa la variable de entorno para la URL de la base de datos
-        ttl: 10, // Tiempo de vida de la sesión en minutos
+        mongoUrl: process.env.MONGO, 
+        ttl: 10, 
       }),
-      secret: process.env.SESSION_SECRET, // Secreto de la sesión desde una variable de entorno
+      secret: process.env.SESSION_SECRET, 
       resave: true,
       saveUninitialized: true,
-      cookie: { maxAge: 1000 * 60 * 60 * 24 }, // Cookie válida por 24 horas
+      cookie: { maxAge: 1000 * 60 * 60 * 24 }, 
     })
-  );
-  
-  
+);
 
 app.use(passport.session());
+
+// Documentacion swagger
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.1',
+    info: {
+      title: "Documentación del poder y del saber",
+      description: "API de LevelUp"
+    }
+  },
+  apis: [`${__dirname}/src/docs/**/*.yaml`] 
+};
+
+
+const specs = swaggerJsdoc(swaggerOptions);
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+
 
 //Vistas
 app.set(`views`, `./views`);

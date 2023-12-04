@@ -1,0 +1,30 @@
+# Funciones del controlador del carrito
+controlador_carrito:
+  descripcion: Controlador para operaciones relacionadas con el carrito de compras.
+
+  funciones:
+    - nombre: addProductToCart
+      descripcion: Agrega un producto al carrito.
+      parametros:
+        - idUser: Identificador del usuario.
+        - idProduct: Identificador del producto.
+      retorno: Redirección a '/api/productos' en caso de éxito.
+
+    - nombre: deleteCartById
+      descripcion: Elimina un carrito por su ID.
+      parametros:
+        - idCart: Identificador del carrito a eliminar.
+      retorno: Mensaje JSON indicando la eliminación exitosa del carrito.
+
+    - nombre: deleteProductById
+      descripcion: Elimina un producto específico de un carrito.
+      parametros:
+        - idUser: Identificador del usuario.
+        - idProduct: Identificador del producto a eliminar.
+      retorno: Redirección a '/api/carrito' en caso de éxito.
+
+    - nombre: viewCart
+      descripcion: Renderiza la vista del carrito.
+      parametros:
+        - userLog: Usuario logueado.
+      retorno: Renderización de la vista 'carrito'.

@@ -73,7 +73,7 @@ const signup = () => {
 
             const mailOptions = {
                 from: process.env.EMAIL,
-                to: `almadebudin23@hotmail.com`,
+                to: `leonelale95@gmail.com`,
                 subject: `Nuevo registro`,
                 html: `
                     <h3>Nuevo usuario registrado</h3>

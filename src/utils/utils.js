@@ -1,5 +1,6 @@
 const bCrypt = require(`bcrypt`);
 
+
 const createHash = password => {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
 };
@@ -10,5 +11,5 @@ const isValidPassword = (userPassword, password) => {
 
 module.exports = {
     createHash,
-    isValidPassword
+    isValidPassword,
 }

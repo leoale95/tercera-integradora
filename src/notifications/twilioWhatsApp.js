@@ -27,7 +27,7 @@ const sendWhatsApp = async (body, from, to) => {
             body: body,
             from: from,
             to: 
-            `whatsapp:+5491121681478`
+            `whatsapp:+5491155237573`
         })
         console.log(message);
 
@@ -38,5 +38,5 @@ const sendWhatsApp = async (body, from, to) => {
 }
 
 module.exports = sendWhatsApp;
-//Prueba ejemplo de clase
+
 // module.exports = options; 
